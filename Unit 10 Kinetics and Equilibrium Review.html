@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Unit 10 Review | Kinetics & Equilibrium</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ── DESIGN TOKENS ── */
+:root{
+  --cream:#FDFAF4;
+  --cream2:#F5F0E8;
+  --ink:#1C1B2E;
+  --ink2:#4A4869;
+  --ink3:#8A87A8;
+  --rule:#DDD8CC;
+
+  /* per-section accents */
+  --s1:#2563EB;   /* strong blue */
+  --s2:#16A34A;   /* forest green */
+  --s3:#DC2626;   /* clear red */
+
+  --body-font:'Plus Jakarta Sans',sans-serif;
+  --display-font:'Fraunces',serif;
+  --mono:'JetBrains Mono',monospace;
+
+  --note-width:168px;
+  --gap:28px;
+}
+
+/* ── RESET ── */
+*{margin:0;padding:0;box-sizing:border-box;}
+html{font-size:15px;}
+body{
+  font-family:var(--body-font);
+  background:var(--cream);
+  color:var(--ink);
+  line-height:1.7;
+  -webkit-print-color-adjust:exact;
+  print-color-adjust:exact;
+}
+
+/* ── PAGE WRAPPER ── */
+.page{
+  max-width:960px;
+  margin:0 auto;
+  padding:40px 36px 48px;
+}
+
+/* ── MASTHEAD ── */
+.masthead{
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:end;
+  gap:20px;
+  padding-bottom:20px;
+  border-bottom:2.5px solid var(--ink);
+  margin-bottom:8px;
+}
+.masthead-left{}
+.course-tag{
+  font-family:var(--mono);font-size:10px;letter-spacing:0.18em;
+  text-transform:uppercase;color:var(--ink2);
+  margin-bottom:6px;display:block;
+}
+.masthead h1{
+  font-family:var(--display-font);
+  font-size:clamp(36px,6vw,58px);
+  font-weight:900;line-height:0.95;
+  letter-spacing:-0.02em;color:var(--ink);
+}
+.masthead h1 em{
+  font-style:italic;color:var(--s1);
+}
+.masthead-meta{
+  text-align:right;
+  font-size:12px;color:var(--ink3);
+  line-height:2;
+}
+.name-fields{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:12px;
+  margin:16px 0 0;
+}
+.field{
+  border-bottom:1.5px solid var(--ink);
+  padding-bottom:3px;padding-top:16px;
+  font-size:11px;color:var(--ink3);letter-spacing:0.06em;
+  text-transform:uppercase;font-family:var(--mono);
+}
+
+/* ── LAYOUT ENGINE: CONTENT + NOTES ── */
+.row{
+  display:grid;
+  grid-template-columns:1fr var(--note-width);
+  gap:var(--gap);
+  margin:20px 0;
+  align-items:start;
+}
+.main-col{}
+.note-col{
+  padding-top:4px;
+}
+.note-label{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:0.16em;
+  text-transform:uppercase;color:var(--ink3);
+  margin-bottom:8px;
+  display:flex;align-items:center;gap:6px;
+}
+.note-label::after{
+  content:'';flex:1;height:1px;background:var(--rule);
+}
+.note-lines{
+  display:flex;flex-direction:column;gap:0;
+}
+.note-line{
+  height:26px;border-bottom:1px solid var(--rule);
+  width:100%;
+}
+/* Full-width rows (no notes col, e.g. tables) */
+.row-full{margin:20px 0;}
+
+/* ── SECTION ── */
+.section{margin-bottom:0;}
+.sec-hdr{
+  display:flex;align-items:center;gap:14px;
+  margin:32px 0 4px;
+  padding-bottom:12px;
+  border-bottom:1.5px solid var(--acc);
+}
+.sec-num{
+  font-family:var(--mono);font-size:11px;
+  color:var(--acc);letter-spacing:0.12em;
+  font-weight:500;
+}
+.sec-hdr h2{
+  font-family:var(--display-font);font-weight:700;
+  font-size:22px;letter-spacing:-0.01em;color:var(--ink);
+}
+.sec-hdr h2 span{color:var(--acc);}
+
+/* ── CONCEPT BLOCK ── */
+.concept{
+  background:#fff;
+  border:1.5px solid var(--rule);
+  border-left:4px solid var(--acc);
+  border-radius:0 8px 8px 0;
+  padding:16px 20px;
+  margin-bottom:14px;
+}
+.concept-title{
+  font-family:var(--display-font);font-weight:600;
+  font-size:14px;color:var(--acc);
+  margin-bottom:10px;letter-spacing:0.01em;
+}
+.concept p, .concept li{font-size:14px;line-height:1.75;color:var(--ink);}
+
+/* ── KEY IDEA CALLOUT ── */
+.key{
+  background:var(--acc-pale);
+  border:1.5px solid var(--acc-mid);
+  border-radius:8px;
+  padding:13px 18px;
+  margin-bottom:14px;
+  display:flex;gap:12px;align-items:flex-start;
+}
+.key-icon{
+  font-family:var(--mono);font-size:11px;font-weight:500;
+  color:var(--acc);white-space:nowrap;
+  background:var(--acc-mid);padding:2px 8px;
+  border-radius:4px;margin-top:2px;flex-shrink:0;
+}
+.key-body{font-size:13.5px;line-height:1.7;color:var(--ink);}
+.key-body strong{color:var(--acc);}
+
+/* ── FORMULA PILL ── */
+.formula{
+  display:inline-block;
+  font-family:var(--mono);font-size:13px;
+  background:var(--cream2);
+  border:1.5px solid var(--rule);
+  border-radius:6px;
+  padding:7px 14px;
+  color:var(--ink);
+  margin:4px 0;
+}
+
+/* ── CHIP (inline tag) ── */
+.chip{
+  display:inline-block;font-family:var(--mono);font-size:11px;
+  padding:2px 8px;border-radius:4px;border:1px solid currentColor;
+  margin:2px 2px;
+}
+
+/* ── TWO / THREE COL ── */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+@media(max-width:680px){.g2,.g3{grid-template-columns:1fr;}.row{grid-template-columns:1fr;}.note-col{display:none;}}
+
+/* ── TABLE ── */
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px;margin-bottom:14px;}
+.tbl thead tr{background:var(--cream2);}
+.tbl th{
+  font-family:var(--mono);font-size:10px;font-weight:500;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--ink2);padding:10px 14px;
+  border-bottom:2px solid var(--rule);text-align:left;
+}
+.tbl td{
+  padding:9px 14px;border-bottom:1px solid var(--rule);
+  vertical-align:top;line-height:1.6;
+}
+.tbl tr:last-child td{border-bottom:none;}
+.tbl tr:hover{background:#fff8;}
+
+.badge{
+  display:inline-block;font-size:11px;font-weight:600;
+  padding:2px 9px;border-radius:4px;
+  font-family:var(--mono);white-space:nowrap;
+}
+.badge.up{background:#DCFCE7;color:#15803D;}
+.badge.dn{background:#FEE2E2;color:#B91C1C;}
+.badge.nc{background:#EFF6FF;color:#1D4ED8;}
+
+/* ── DIAGRAM ── */
+.diagram-card{
+  background:#fff;border:1.5px solid var(--rule);
+  border-radius:8px;padding:16px;
+  margin-bottom:14px;
+}
+.diagram-cap{
+  text-align:center;font-size:11.5px;color:var(--ink3);
+  font-style:italic;margin-top:10px;
+}
+
+/* ── CHECKLIST ── */
+.checklist{
+  background:#fff;border:1.5px solid var(--rule);border-radius:8px;
+  padding:18px 22px;
+}
+.check-section-title{
+  font-family:var(--mono);font-size:10px;letter-spacing:0.14em;
+  text-transform:uppercase;color:var(--acc);
+  margin-bottom:8px;margin-top:14px;
+}
+.check-section-title:first-child{margin-top:0;}
+.check-item{
+  display:flex;align-items:flex-start;gap:10px;
+  font-size:13.5px;padding:5px 0;
+  border-bottom:1px solid var(--rule);
+}
+.check-item:last-child{border-bottom:none;}
+.check-box{
+  width:16px;height:16px;border:1.5px solid var(--rule);
+  border-radius:3px;flex-shrink:0;margin-top:3px;
+  background:var(--cream);
+}
+
+/* ── PAGE DIVIDER ── */
+.pg-break{
+  margin:40px 0 36px;
+  display:flex;align-items:center;gap:12px;
+}
+.pg-break-line{flex:1;height:1px;background:var(--rule);}
+.pg-break-label{
+  font-family:var(--mono);font-size:10px;letter-spacing:0.16em;
+  color:var(--ink3);white-space:nowrap;padding:4px 10px;
+  border:1px solid var(--rule);border-radius:20px;
+}
+
+/* ── LIST STYLES ── */
+ul.plain{list-style:none;padding:0;}
+ul.plain li{
+  padding:5px 0 5px 16px;position:relative;
+  font-size:14px;line-height:1.65;
+  border-bottom:1px dotted var(--rule);
+}
+ul.plain li:last-child{border-bottom:none;}
+ul.plain li::before{
+  content:'';position:absolute;left:0;top:13px;
+  width:5px;height:5px;border-radius:50%;
+  background:var(--acc);
+}
+
+/* ── SECTION COLOR THEMES ── */
+.s1{
+  --acc:var(--s1);
+  --acc-pale:#EFF6FF;
+  --acc-mid:#BFDBFE;
+}
+.s2{
+  --acc:var(--s2);
+  --acc-pale:#F0FDF4;
+  --acc-mid:#BBF7D0;
+}
+.s3{
+  --acc:var(--s3);
+  --acc-pale:#FEF2F2;
+  --acc-mid:#FECACA;
+}
+
+/* ── PRINT BUTTON ── */
+.print-btn{
+  position:fixed;bottom:28px;right:28px;
+  display:flex;align-items:center;gap:8px;
+  background:var(--ink);color:#fff;
+  font-family:var(--mono);font-size:12px;letter-spacing:0.08em;
+  padding:11px 20px;border-radius:40px;
+  border:none;cursor:pointer;
+  box-shadow:0 4px 18px rgba(28,27,46,0.18);
+  transition:transform 0.15s,box-shadow 0.15s;
+  z-index:999;
+}
+.print-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(28,27,46,0.22);}
+.print-btn:active{transform:translateY(0);}
+.print-btn svg{width:15px;height:15px;flex-shrink:0;}
+@media print{
+  .print-btn{display:none;}
+  body{background:#fff;font-size:13px;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .page{padding:20px 28px;}
+  .pg-break{page-break-after:always;margin:24px 0;}
+  .sec-hdr{margin-top:20px;}
+  .row{gap:18px;}
+  --note-width:150px;
+  .note-col{border-left:1px solid var(--rule);padding-left:12px;}
+  .diagram-card{break-inside:avoid;}
+  .concept{break-inside:avoid;}
+  .key{break-inside:avoid;}
+  .checklist{break-inside:avoid;break-before:page;}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ═══════ MASTHEAD ═══════ -->
+<div class="masthead">
+  <div class="masthead-left">
+    <span class="course-tag">NYS Regents Chemistry · Unit 10</span>
+    <h1>Kinetics &amp;<br><em>Equilibrium</em></h1>
+  </div>
+  <div class="masthead-meta">
+    Dr. Sacrestano<br>
+    Mineola High School<br>
+    Exam Review
+  </div>
+</div>
+<div class="name-fields">
+  <div class="field">Name:</div>
+  <div class="field">Date:</div>
+  <div class="field">Period:</div>
+</div>
+
+
+<!-- ═══════════════════════════════════
+     SECTION 1 · COLLISION THEORY & PE
+════════════════════════════════════ -->
+<div class="s1">
+
+<div class="sec-hdr">
+  <span class="sec-num">01</span>
+  <h2><span>Collision Theory</span> &amp; Potential Energy Diagrams</h2>
+</div>
+
+<!-- Collision Theory -->
+<div class="row">
+  <div class="main-col">
+    <div class="concept">
+      <div class="concept-title">Two Requirements for a Reaction to Occur</div>
+      <div class="g2">
+        <div>
+          <strong style="color:var(--s1);">① Proper Energy</strong>
+          <p style="margin-top:6px;">Particles must collide with kinetic energy <em>at least as large as the activation energy (Eₐ)</em>. Low-energy collisions are ineffective — particles just bounce apart unchanged.</p>
+        </div>
+        <div>
+          <strong style="color:var(--s1);">② Proper Orientation</strong>
+          <p style="margin-top:6px;">Reactive atoms must be <em>facing each other</em> at the moment of collision. The right energy but wrong angle = no reaction. Think: trying to shake hands with fists facing inward.</p>
+        </div>
+      </div>
+    </div>
+    <div class="key">
+      <span class="key-icon">★ KEY</span>
+      <div class="key-body"><strong>Activated Complex</strong> — the short-lived, unstable arrangement of atoms at the <em>peak</em> of a PE diagram. It can either break down into products (forward reaction) or re-form reactants (reverse reaction). It is not a stable molecule.</div>
+    </div>
+  </div>
+  <div class="note-col">
+    <div class="note-label">My Notes</div>
+    <div class="note-lines">
+      <div class="note-line"></div><div class="note-line"></div>
+      <div class="note-line"></div><div class="note-line"></div>
+      <div class="note-line"></div><div class="note-line"></div>
+      <div class="note-line"></div>
+    </div>
+  </div>
+</div>
+
+<!-- PE Diagram + Key formulas -->
+<div class="row">
+  <div class="main-col">
+    <div class="g2" style="align-items:start;">
+      <div>
+        <div class="diagram-card">
+          <svg width="100%" viewBox="0 0 300 210" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                <path d="M1 2L9 5L1 8" fill="none" stroke="context-stroke" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </marker>
+              <marker id="ah2" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M9 2L1 5L9 8" fill="none" stroke="context-stroke" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </marker>
+            </defs>
+            <!-- Axes -->
+            <line x1="36" y1="182" x2="284" y2="182" stroke="#DDD8CC" stroke-width="1.5"/>
+            <line x1="36" y1="14" x2="36" y2="182" stroke="#DDD8CC" stroke-width="1.5"/>
+            <text x="160" y="198" text-anchor="middle" fill="#8A87A8" font-size="10" font-family="Plus Jakarta Sans">Reaction Coordinate →</text>
+            <text x="14" y="100" text-anchor="middle" fill="#8A87A8" font-size="9" font-family="Plus Jakarta Sans" transform="rotate(-90,14,100)">Potential Energy</text>
+            <!-- Curve (exothermic) - reactants at 125, peak at 42, products at 158 -->
+            <path d="M52,125 C78,125 88,42 140,42 C192,42 200,158 222,158 L276,158"
+              fill="none" stroke="#2563EB" stroke-width="2.8" stroke-linecap="round"/>
+            <!-- Dashed reference lines -->
+            <line x1="36" y1="125" x2="104" y2="125" stroke="#DDD8CC" stroke-width="1" stroke-dasharray="4,3"/>
+            <line x1="36" y1="42"  x2="140" y2="42"  stroke="#DDD8CC" stroke-width="1" stroke-dasharray="4,3"/>
+            <line x1="36" y1="158" x2="204" y2="158" stroke="#DDD8CC" stroke-width="1" stroke-dasharray="4,3"/>
+            <!-- Eₐ bracket (reactants → peak) -->
+            <line x1="98" y1="125" x2="98" y2="44" stroke="#7C3AED" stroke-width="1.8" stroke-dasharray="5,3" marker-end="url(#ah)" marker-start="url(#ah2)"/>
+            <text x="80" y="88" text-anchor="middle" fill="#7C3AED" font-size="11" font-family="Plus Jakarta Sans" font-weight="700">Eₐ</text>
+            <!-- ΔH bracket (reactants → products) -->
+            <line x1="214" y1="125" x2="214" y2="160" stroke="#DC2626" stroke-width="1.8" stroke-dasharray="5,3" marker-end="url(#ah)" marker-start="url(#ah2)"/>
+            <text x="242" y="146" text-anchor="start" fill="#DC2626" font-size="10.5" font-family="Plus Jakarta Sans" font-weight="600">ΔH</text>
+            <!-- Activated complex star -->
+            <circle cx="140" cy="42" r="5" fill="#FBBF24" stroke="#fff" stroke-width="1.5"/>
+            <text x="140" y="32" text-anchor="middle" fill="#92400E" font-size="9" font-family="Plus Jakarta Sans" font-weight="600">Activated Complex</text>
+            <!-- Labels -->
+            <text x="60" y="118" text-anchor="middle" fill="#2563EB" font-size="9.5" font-family="Plus Jakarta Sans" font-weight="600">Reactants</text>
+            <text x="250" y="152" text-anchor="middle" fill="#16A34A" font-size="9.5" font-family="Plus Jakarta Sans" font-weight="600">Products</text>
+          </svg>
+          <div class="diagram-cap">Exothermic reaction — products lower than reactants</div>
+        </div>
+      </div>
+      <div>
+        <div class="concept" style="margin-bottom:12px;">
+          <div class="concept-title">Activation Energy (Eₐ)</div>
+          <div class="formula">Activated Complex PE − Reactant PE</div>
+          <p style="font-size:13px;margin-top:8px;">The energy "hill" to get over. <strong>Every reaction needs it</strong> — even exothermic ones. A catalyst lowers this barrier.</p>
+        </div>
+        <div class="concept" style="margin-bottom:12px;">
+          <div class="concept-title">Heat of Reaction (ΔH)</div>
+          <div class="formula">Product PE − Reactant PE</div>
+          <p style="font-size:13px;margin-top:8px;">
+            <strong style="color:#16A34A;">Negative ΔH →</strong> Exothermic (releases heat)<br>
+            <strong style="color:#DC2626;">Positive ΔH →</strong> Endothermic (absorbs heat)
+          </p>
+        </div>
+        <div class="concept">
+          <div class="concept-title">Reverse Reaction Eₐ</div>
+          <div class="formula">Activated Complex PE − Product PE</div>
+          <p style="font-size:13px;margin-top:8px;">The reverse reaction climbs up from the <em>product level</em> to the activated complex.</p>
+        </div>
+      </div>
+    </div>
+    <!-- Exo vs Endo compare -->
+    <div class="g2">
+      <div style="background:#EFF6FF;border:1.5px solid #BFDBFE;border-radius:8px;padding:14px 18px;">
+        <div style="font-family:'Fraunces',serif;font-weight:700;font-size:14px;color:#1D4ED8;margin-bottom:8px;">Exothermic Rxn</div>
+        <ul class="plain" style="--acc:#1D4ED8;">
+          <li>Products have <strong>less PE</strong> than reactants</li>
+          <li>ΔH is <strong>negative (−)</strong></li>
+          <li>Heat is released — system warms surroundings</li>
+          <li>PE diagram ends <em>lower</em> than it starts</li>
+          <li>Ex: combustion, NaOH dissolving</li>
+        </ul>
+      </div>
+      <div style="background:#FEF2F2;border:1.5px solid #FECACA;border-radius:8px;padding:14px 18px;">
+        <div style="font-family:'Fraunces',serif;font-weight:700;font-size:14px;color:#B91C1C;margin-bottom:8px;">Endothermic Rxn</div>
+        <ul class="plain" style="--acc:#B91C1C;">
+          <li>Products have <strong>more PE</strong> than reactants</li>
+          <li>ΔH is <strong>positive (+)</strong></li>
+          <li>Heat is absorbed — system cools surroundings</li>
+          <li>PE diagram ends <em>higher</em> than it starts</li>
+          <li>Ex: photosynthesis, NH₄Cl dissolving</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="note-col">
+    <div class="note-label">My Notes</div>
+    <div class="note-lines">
+      <div class="note-line"></div><div class="note-line"></div>
+      <div class="note-line"></div><div class="note-line"></div>
+      <div class="note-line"></div><div class="note-line"></div>
+      <div class="note-line"></div><div class="note-line"></div>
+      <div class="note-line"></div><div class="note-line"></div>
+      <div class="note-line"></div><div class="note-line"></div>
+      <div class="note-line"></div><div class="note-line"></div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end s1 -->
+
+<!-- PAGE 2 -->
+<div class="pg-break">
+  <div class="pg-break-line"></div>
+  <div class="pg-break-label">Page 2</div>
+  <div class="pg-break-line"></div>
+</div>
+
+<!-- ═══════════════════════════════════
+     SECTION 2 · REACTION RATES & CATALYSTS
+════════════════════════════════════ -->
+<div class="s2">
+
+<div class="sec-hdr">
+  <span class="sec-num">02</span>
+  <h2><span>Reaction Rates,</span> Catalysts &amp; Entropy</h2>
+</div>
+
+<!-- Rate factors table -->
+<div class="row">
+  <div class="main-col">
+    <div class="concept" style="padding-bottom:6px;">
+      <div class="concept-title">Factors That Affect Reaction Rate</div>
+      <table class="tbl">
+        <thead>
+          <tr>
+            <th>Factor</th>
+            <th>If you…</th>
+            <th>Rate</th>
+            <th>Why</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Temperature</strong></td>
+            <td>Increase it</td>
+            <td><span class="badge up">↑ faster</span></td>
+            <td>More KE → more collisions exceed Eₐ</td>
+          </tr>
+          <tr>
+            <td><strong>Concentration</strong></td>
+            <td>Increase it</td>
+            <td><span class="badge up">↑ faster</span></td>
+            <td>More particles → more collisions per second</td>
+          </tr>
+          <tr>
+            <td><strong>Pressure</strong> (gas)</td>
+            <td>Increase it</td>
+            <td><span class="badge up">↑ faster</span></td>
+            <td>Pushes molecules closer = higher effective concentration</td>
+          </tr>
+          <tr>
+            <td><strong>Surface Area</strong></td>
+            <td>Increase it</td>
+            <td><span class="badge up">↑ faster</span></td>
+            <td>More reactant exposed = more contact between particles</td>
+          </tr>
+          <tr>
+            <td><strong>Catalyst</strong></td>
+            <td>Add one</td>
+            <td><span class="badge up">↑ faster</span></td>
+            <td>Provides alternate pathway with <strong>lower Eₐ</strong></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="key" style="margin-bottom:0;">
+        <span class="key-icon">📐 EX</span>
+        <div class="key-body"><strong>Surface Area in action:</strong> 1 g of powdered zinc reacts faster with HCl than 1 g of solid zinc. Same mass — but powder has much more surface exposed. More exposed surface = more places for acid to attack.</div>
+      </div>
+    </div>
+  </div>
+  <div class="note-col">
+    <div class="note-label">My Notes</div>
+    <div class="note-lines">
+      <div class="note-line"></div><div class="note-line"></div>
+      <div class="note-line"></div><div class="note-line"></div>
+      <div class="note-line"></div><div class="note-line"></div>
+      <div class="note-line"></div><div class="note-line"></div>
+      <div class="note-line"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Catalysts + Heat of Solution -->
+<div class="row">
+  <div class="main-col">
+    <div class="g2" style="align-items:start;">
+      <!-- Catalysts -->
+      <div>
+        <div class="concept">
+          <div class="concept-title">How a Catalyst Works</div>
+          <p style="margin-bottom:10px;">A catalyst provides an <strong>alternate reaction pathway</strong> with a <strong style="color:var(--s2);">lower activation energy</strong> — like a shortcut through the energy hill.</p>
+          <div class="diagram-card" style="padding:12px;margin-bottom:12px;">
+            <svg width="100%" viewBox="0 0 260 160" xmlns="http://www.w3.org/2000/svg">
+              <!-- axes -->
+              <line x1="24" y1="142" x2="240" y2="142" stroke="#DDD8CC" stroke-width="1.2"/>
+              <line x1="24" y1="10" x2="24" y2="142" stroke="#DDD8CC" stroke-width="1.2"/>
+              <!-- no catalyst curve -->
+              <path d="M38,108 C60,108 66,30 112,30 C158,30 164,128 186,128 L240,128"
+                fill="none" stroke="#8A87A8" stroke-width="2" stroke-linecap="round" stroke-dasharray="6,3"/>
+              <!-- with catalyst curve -->
+              <path d="M38,108 C60,108 66,64 112,64 C158,64 164,128 186,128 L240,128"
+                fill="none" stroke="#16A34A" stroke-width="2.5" stroke-linecap="round"/>
+              <!-- labels -->
+              <text x="112" y="24" text-anchor="middle" fill="#6B7FA3" font-size="9" font-family="Plus Jakarta Sans">no catalyst</text>
+              <text x="112" y="58" text-anchor="middle" fill="#16A34A" font-size="9" font-family="Plus Jakarta Sans" font-weight="600">with catalyst</text>
+              <text x="38" y="101" text-anchor="middle" fill="#2563EB" font-size="8.5" font-family="Plus Jakarta Sans">Reactants</text>
+              <text x="218" y="122" text-anchor="middle" fill="#16A34A" font-size="8.5" font-family="Plus Jakarta Sans">Products</text>
+              <text x="240" y="138" text-anchor="end" fill="#8A87A8" font-size="8" font-family="Plus Jakarta Sans" font-style="italic">ΔH unchanged</text>
+            </svg>
+            <div class="diagram-cap">Catalyst lowers Eₐ; ΔH stays the same</div>
+          </div>
+          <div style="font-size:13px;line-height:1.9;color:var(--ink);">
+            ✅ Lowers Eₐ for <strong>both</strong> forward &amp; reverse<br>
+            ✅ Speeds up <strong>both</strong> directions equally<br>
+            ❌ Does <strong>not</strong> change ΔH<br>
+            ❌ Does <strong>not</strong> shift equilibrium position
+          </div>
+        </div>
+      </div>
+      <!-- Heat of solution + Entropy -->
+      <div>
+        <div class="concept" style="margin-bottom:12px;">
+          <div class="concept-title">Heat of Solution (Ref Table H)</div>
+          <div style="background:#EFF6FF;border-radius:6px;padding:10px 12px;margin-bottom:8px;">
+            <div style="font-weight:700;font-size:12.5px;color:#1D4ED8;margin-bottom:4px;">Exothermic dissolving (ΔH &lt; 0) → solution warms</div>
+            <span class="chip" style="color:#1D4ED8;">NaOH</span>
+            <span class="chip" style="color:#1D4ED8;">LiBr</span>
+            <span class="chip" style="color:#1D4ED8;">HCl</span>
+          </div>
+          <div style="background:#F0FDF4;border-radius:6px;padding:10px 12px;">
+            <div style="font-weight:700;font-size:12.5px;color:#15803D;margin-bottom:4px;">Endothermic dissolving (ΔH &gt; 0) → solution cools</div>
+            <span class="chip" style="color:#15803D;">NH₄Cl</span>
+            <span class="chip" style="color:#15803D;">NaCl</span>
+            <span class="chip" style="color:#15803D;">KNO₃</span>
+          </div>
+        </div>
+        <div class="concept">
+          <div class="concept-title">Entropy &amp; Spontaneous Change</div>
+          <p style="margin-bottom:8px;"><strong>Entropy (S)</strong> measures the <strong>disorder or randomness</strong> of a system.</p>
+          <div style="font-family:var(--mono);font-size:11.5px;text-align:center;padding:8px;background:var(--cream2);border-radius:6px;margin-bottom:8px;letter-spacing:0.04em;">
+            Gas &gt; Liquid &gt; Solid &nbsp;(entropy order)
+          </div>
+          <p style="font-size:13px;">Systems naturally move toward <strong>lower energy</strong> and <strong>more disorder</strong>. Exothermic reactions that increase entropy are the most thermodynamically favorable.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="note-col">
+    <div class="note-label">My Notes</div>
+    <div class="note-lines">
+      <div class="note-line"></div><div class="note-line"></div>
+      <div class="note-line"></div><div class="note-line"></div>
+      <div class="note-line"></div><div class="note-line"></div>
+      <div class="note-line"></div><div class="note-line"></div>
+      <div class="note-line"></div><div class="note-line"></div>
+      <div class="note-line"></div><div class="note-line"></div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end s2 -->
+
+<!-- PAGE 3 -->
+<div class="pg-break">
+  <div class="pg-break-line"></div>
+  <div class="pg-break-label">Page 3</div>
+  <div class="pg-break-line"></div>
+</div>
+
+<!-- ═══════════════════════════════════
+     SECTION 3 · EQUILIBRIUM & LE CHATELIER
+════════════════════════════════════ -->
+<div class="s3">
+
+<div class="sec-hdr">
+  <span class="sec-num">03</span>
+  <h2><span>Chemical Equilibrium</span> &amp; Le Chatelier's Principle</h2>
+</div>
+
+<!-- Dynamic Equilibrium -->
+<div class="row">
+  <div class="main-col">
+    <div class="concept">
+      <div class="concept-title">What Is Chemical Equilibrium?</div>
+      <div class="g2">
+        <ul class="plain" style="--acc:var(--s3);">
+          <li>The reaction is <strong>reversible</strong> — both forward and reverse occur simultaneously</li>
+          <li>Rate of forward reaction <strong>equals</strong> rate of reverse reaction</li>
+          <li>Concentrations of reactants and products are <strong>constant</strong> — but not necessarily equal</li>
+        </ul>
+        <ul class="plain" style="--acc:var(--s3);">
+          <li>System must be <strong>closed</strong> (sealed container)</li>
+          <li>It's <em>dynamic</em> — reactions keep happening, they just cancel each other out</li>
+          <li>On a graph: equilibrium = the moment lines <strong>flatten and stay flat</strong></li>
+        </ul>
+      </div>
+    </div>
+    <div class="key">
+      <span class="key-icon">⚠ NOTE</span>
+      <div class="key-body">Equal concentrations ≠ equilibrium. <strong>Constant concentrations</strong> = equilibrium. The two amounts can be very different from each other — what matters is that they stop changing.</div>
+    </div>
+  </div>
+  <div class="note-col">
+    <div class="note-label">My Notes</div>
+    <div class="note-lines">
+      <div class="note-line"></div><div class="note-line"></div>
+      <div class="note-line"></div><div class="note-line"></div>
+      <div class="note-line"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Le Chatelier table -->
+<div class="row">
+  <div class="main-col">
+    <div class="concept" style="padding-bottom:8px;">
+      <div class="concept-title">Le Chatelier's Principle</div>
+      <p style="font-size:13.5px;font-style:italic;color:var(--ink2);margin-bottom:14px;">"When a stress is applied to a system at equilibrium, the equilibrium shifts to <strong style="color:var(--s3);">relieve that stress</strong>."</p>
+      <table class="tbl">
+        <thead>
+          <tr>
+            <th>Stress Applied</th>
+            <th>Equilibrium Shifts</th>
+            <th>Because…</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Add reactant</td>
+            <td><span class="badge up">→ Right (forward)</span></td>
+            <td>Uses up the added reactant</td>
+          </tr>
+          <tr>
+            <td>Remove reactant</td>
+            <td><span class="badge dn">← Left (reverse)</span></td>
+            <td>Makes more reactant to compensate</td>
+          </tr>
+          <tr>
+            <td>Add product</td>
+            <td><span class="badge dn">← Left (reverse)</span></td>
+            <td>Uses up the added product</td>
+          </tr>
+          <tr>
+            <td>Remove product</td>
+            <td><span class="badge up">→ Right (forward)</span></td>
+            <td>Makes more product to compensate</td>
+          </tr>
+          <tr>
+            <td>Increase temperature</td>
+            <td><span class="badge dn">← Away from heat</span></td>
+            <td>Heat acts like a reactant/product — treat it that way!</td>
+          </tr>
+          <tr>
+            <td>Decrease temperature</td>
+            <td><span class="badge up">→ Toward heat side</span></td>
+            <td>Makes heat to compensate for the loss</td>
+          </tr>
+          <tr>
+            <td>Increase pressure (gas)</td>
+            <td><span class="badge nc">→ Fewer gas moles side</span></td>
+            <td>Reduces # of gas molecules to lower pressure</td>
+          </tr>
+          <tr>
+            <td>Decrease pressure (gas)</td>
+            <td><span class="badge nc">→ More gas moles side</span></td>
+            <td>Makes more gas molecules to raise pressure</td>
+          </tr>
+          <tr>
+            <td>Add a catalyst</td>
+            <td><span style="font-size:11.5px;font-family:var(--mono);color:var(--ink3);">No shift</span></td>
+            <td>Reaches equilibrium <em>faster</em> — same final position</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="key" style="margin-bottom:0;margin-top:12px;">
+        <span class="key-icon">🌡 TIP</span>
+        <div class="key-body"><strong>Temperature trick:</strong> Find "heat" or "energy" in the equation. If it's a <em>product</em> (exothermic), heat is on the right — raising temp shifts LEFT. If it's a <em>reactant</em> (endothermic), heat is on the left — raising temp shifts RIGHT.</div>
+      </div>
+    </div>
+  </div>
+  <div class="note-col">
+    <div class="note-label">My Notes</div>
+    <div class="note-lines">
+      <div class="note-line"></div><div class="note-line"></div>
+      <div class="note-line"></div><div class="note-line"></div>
+      <div class="note-line"></div><div class="note-line"></div>
+      <div class="note-line"></div><div class="note-line"></div>
+      <div class="note-line"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Worked examples + solubility + checklist -->
+<div class="row">
+  <div class="main-col">
+    <div class="g2" style="align-items:start;margin-bottom:16px;">
+      <!-- Haber process -->
+      <div style="background:#FEF2F2;border:1.5px solid #FECACA;border-radius:8px;padding:15px 18px;">
+        <div style="font-family:'Fraunces',serif;font-weight:700;font-size:14px;color:#B91C1C;margin-bottom:8px;">Haber Process — Worked Example</div>
+        <div class="formula" style="display:block;text-align:center;margin-bottom:10px;font-size:12px;">
+          N₂(g) + 3H₂(g) ⇌ 2NH₃(g) + heat
+        </div>
+        <p style="font-size:13px;margin-bottom:6px;color:var(--ink2);">To produce <strong>more NH₃</strong> (shift right):</p>
+        <ul class="plain" style="--acc:#B91C1C;">
+          <li>↑ pressure (4 gas mol → 2 gas mol)</li>
+          <li>Add more N₂ or H₂</li>
+          <li>Remove NH₃ as it forms</li>
+          <li>↓ temperature (heat is a product)</li>
+          <li>Catalyst → faster equilibrium, same position</li>
+        </ul>
+      </div>
+      <!-- Solubility equilibrium -->
+      <div style="background:#F0FDF4;border:1.5px solid #BBF7D0;border-radius:8px;padding:15px 18px;">
+        <div style="font-family:'Fraunces',serif;font-weight:700;font-size:14px;color:#15803D;margin-bottom:8px;">Phase &amp; Solubility Equilibrium</div>
+        <div class="formula" style="display:block;text-align:center;margin-bottom:8px;font-size:12px;">H₂O(ℓ) ⇌ H₂O(g)</div>
+        <p style="font-size:13px;margin-bottom:8px;">Requires a <strong>sealed container</strong>. Evaporation rate = condensation rate.</p>
+        <div style="font-weight:700;font-size:13px;margin-bottom:4px;color:#15803D;">Reference Table G (Solubility):</div>
+        <ul class="plain" style="--acc:#15803D;">
+          <li><strong>On the curve</strong> = saturated = at equilibrium</li>
+          <li><strong>Below the curve</strong> = unsaturated (can dissolve more)</li>
+          <li><strong>Above the curve</strong> = supersaturated (unstable)</li>
+        </ul>
+        <div style="margin-top:10px;padding:9px 12px;background:#fff;border-radius:6px;border:1px solid #BBF7D0;">
+          <div style="font-size:12px;font-family:var(--mono);margin-bottom:4px;color:#15803D;">AgCl(s) ⇌ Ag⁺(aq) + Cl⁻(aq)</div>
+          <div style="font-size:12.5px;color:var(--ink2);">Add Cl⁻ → shifts left → Ag⁺ decreases, more AgCl(s) forms</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Self-check checklist -->
+    <div class="checklist">
+      <div style="font-family:'Fraunces',serif;font-weight:700;font-size:17px;margin-bottom:14px;color:var(--ink);">✦ Can You Answer These Before the Exam?</div>
+      <div class="g3">
+        <div>
+          <div class="check-section-title" style="--acc:var(--s1);">Collision Theory &amp; PE</div>
+          <div class="check-item"><div class="check-box"></div><span>2 conditions for effective collision</span></div>
+          <div class="check-item"><div class="check-box"></div><span>Define activated complex</span></div>
+          <div class="check-item"><div class="check-box"></div><span>Read Eₐ from a PE diagram</span></div>
+          <div class="check-item"><div class="check-box"></div><span>Calculate ΔH from a PE diagram</span></div>
+          <div class="check-item"><div class="check-box"></div><span>Tell exothermic from endothermic by diagram shape</span></div>
+          <div class="check-item"><div class="check-box"></div><span>Sketch reverse reaction Eₐ</span></div>
+        </div>
+        <div>
+          <div class="check-section-title" style="--acc:var(--s2);">Rates &amp; Catalysts</div>
+          <div class="check-item"><div class="check-box"></div><span>Name all 5 rate factors</span></div>
+          <div class="check-item"><div class="check-box"></div><span>Explain the zinc powder example</span></div>
+          <div class="check-item"><div class="check-box"></div><span>Explain how catalyst lowers Eₐ</span></div>
+          <div class="check-item"><div class="check-box"></div><span>What does a catalyst NOT change?</span></div>
+          <div class="check-item"><div class="check-box"></div><span>Distinguish exo vs endo dissolving</span></div>
+          <div class="check-item"><div class="check-box"></div><span>Define entropy; rank S, L, G</span></div>
+        </div>
+        <div>
+          <div class="check-section-title" style="--acc:var(--s3);">Equilibrium</div>
+          <div class="check-item"><div class="check-box"></div><span>Define dynamic equilibrium</span></div>
+          <div class="check-item"><div class="check-box"></div><span>Identify equilibrium on a graph</span></div>
+          <div class="check-item"><div class="check-box"></div><span>Apply Le Chatelier to any stress</span></div>
+          <div class="check-item"><div class="check-box"></div><span>Use the temperature trick</span></div>
+          <div class="check-item"><div class="check-box"></div><span>Use Reference Table G for saturation</span></div>
+          <div class="check-item"><div class="check-box"></div><span>Analyze the AgCl ion example</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="note-col">
+    <div class="note-label">My Notes</div>
+    <div class="note-lines">
+      <div class="note-line"></div><div class="note-line"></div>
+      <div class="note-line"></div><div class="note-line"></div>
+      <div class="note-line"></div><div class="note-line"></div>
+      <div class="note-line"></div><div class="note-line"></div>
+      <div class="note-line"></div><div class="note-line"></div>
+      <div class="note-line"></div><div class="note-line"></div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end s3 -->
+
+<!-- FOOTER -->
+<div style="border-top:1px solid var(--rule);margin-top:16px;padding-top:12px;display:flex;justify-content:space-between;align-items:center;">
+  <span style="font-family:var(--mono);font-size:10px;color:var(--ink3);letter-spacing:0.12em;">MINEOLA HIGH SCHOOL · CHEMISTRY UNIT 10 · DR. SACRESTANO</span>
+  <span style="font-family:var(--mono);font-size:10px;color:var(--ink3);">NYS Regents Prep</span>
+</div>
+
+</div><!-- end page -->
+
+<button class="print-btn" onclick="printSheet()">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="6 9 6 2 18 2 18 9"/>
+    <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+    <rect x="6" y="14" width="12" height="8"/>
+  </svg>
+  Print / Save PDF
+</button>
+
+<script>
+function printSheet(){
+  // Brief flash to confirm the button was pressed
+  const btn = document.querySelector('.print-btn');
+  btn.textContent = 'Opening print dialog…';
+  btn.style.opacity = '0.7';
+  setTimeout(()=>{ window.print(); }, 120);
+  setTimeout(()=>{
+    btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;flex-shrink:0"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg> Print / Save PDF`;
+    btn.style.opacity = '1';
+  }, 900);
+}
+</script>
+</body>
+</html>
